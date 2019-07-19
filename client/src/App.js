@@ -1,29 +1,27 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      places: []
+    };
+  }
   componentDidMount(){
-    fetch('/articles').then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err))
+    fetch('/articles').then(res => res.json()).then(data => this.setState({places:data})).catch(err => console.log(err.msg));
+  }
+  showData=()=>{
+    console.log(this.state.places)
   }
   render(){
     return(
+      <div>
         <div className="App">
-              <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                  Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                  className="App-link"
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn React
-                </a>
-              </header>
-            </div>
+          <p>Data We Have Right Now</p>
+          {this.state.places>-1?this.showData():<p>Places Are Coming..</p>}
+        </div>
+      </div>
     )
   }
 }
