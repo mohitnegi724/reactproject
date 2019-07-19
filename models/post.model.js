@@ -7,7 +7,11 @@ const postSchema = new Schema({
     source:String,
     contactNumber:Number,
     image:String,
-    imgPictureCredit:String
+    imgPictureCredit:String,
+    alias:{
+        type:String,
+        unique:true
+    }
 });
 const postModel = mongoose.model('Articles',postSchema);
 

@@ -21,7 +21,11 @@ app.get('/articles',(req, res)=>{
     posts.find({}).then(responses=>res.json(responses)).catch(err=>res.send(err));
 });
 
-app.post('/create',(req, res)=>{
+app.post('/create',async (req, res)=>{
+    alias= ()=>{
+        return req.body.title.toLowerCase().split(' ').join("-")
+    }
+    const articleAlias = alias();
     const NewPost={
         title:req.body.title,
         articleBody:req.body.articleBody,
@@ -29,9 +33,10 @@ app.post('/create',(req, res)=>{
         publishDate:Date.now(),
         source:req.body.source,
         image: req.body.image,
-        imgPictureCredit: req.body.credit
+        imgPictureCredit: req.body.credit,
+        alias:articleAlias
     };
-    posts.create(NewPost).then(data=>res.send(data)).catch(err=>res.send(err));
+    await posts.create(NewPost).then(data=>res.send(data)).catch(err=>res.send(err));
 });
 
 app.delete('/delete/:id',(req, res)=>{
