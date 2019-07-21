@@ -1,54 +1,28 @@
-import React, {Component} from 'react';
-import {BrowserRouter,Link, Router} from 'react-router-dom';
-import './App.css';
+import React, { Component } from 'react';
+import Posts from './Components/Posts';
+import Post from './Components/Post';
+import Header from './Components/Header';
+import AddPlace from './Components/AddPlace';
+import {BrowserRouter,Route, Switch} from 'react-router-dom';
 
-
-class App extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      places: []
-    };
-  }
-  componentDidMount(){
-    fetch('/articles').then(res => res.json()).then(data => this.setState({places:data})).catch(err => console.log(err.msg));
-    console.log("API Called Successfully");
-  }
-  showData=()=>{
-    const {places}= this.state;
-    return places.map(place=>{
-      return(
-        <div key={place._id} className="articleBody">
-          <h3 className="articleTitle">{place.title}</h3>
-          <img src={place.image} alt={place.title} className="articleImage"/>
-          {place.imgPictureCredit ? <a href={place.image}><p className="pictureCredits">Picture Credits : {place.imgPictureCredit}</p></a> :null}
-          <div className="articleDesc">
-            <p >{place.articleBody}</p>
-            <p>Source : <a href={place.source}>{place.source}</a></p>
-          </div>
-        </div>
-      )
-    })
-  }
-  render(){
-    return(
-      <React.Fragment>
-        <div>
-          <header>
-            <h4>Go Guide!</h4>
-            <button className="addPlaceButton">Add New Place!</button>
-          </header>
+class App extends Component {
+  render() {
+    return (
+      <div>
+         <BrowserRouter>
+          <Header/>
           <div className="container">
-            {this.showData()}
+                <Switch>
+                  <Route exact path="/" component={Posts}/>
+                  <Route path="/article/:id" component={Post}/>
+                  <Route path="/addplace" component={AddPlace}/>
+                </Switch>
           </div>
-          {/* {this.state.places && this.state.places>-1?this.showData():<p>Places Are Coming..</p>} */}
-        </div>
-      </React.Fragment>
+        </BrowserRouter>
+      </div>
     )
   }
 }
-
-
 
 
 export default App;

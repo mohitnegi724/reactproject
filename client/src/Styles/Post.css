@@ -1,0 +1,64 @@
+.articleBody {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    width: 90%;
+    display: -webkit-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 4px -2px rgb(32, 32, 32);
+    transition: 0.9s ease-in-out;
+}
+
+.articleBody:hover{
+    margin-top: 5px;
+    box-shadow:0px 0px 10px -4px rgb(32, 32, 32)
+}
+
+.ImageInfo{
+    width: 40%;
+}
+
+.articleImage {
+    width: 100%;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    object-fit: cover;
+}
+
+.pictureCredits{
+    position: absolute;
+    left: 5px;
+    color: white !important;
+    bottom: 0;
+}
+.pictureCredits a{
+    text-decoration: none;
+    color: white;
+}
+.articleDesc {
+    padding-left: 5%;
+    padding-right: 5%;
+    width:50%;
+    text-align: justify;
+}
+
+
+.openedPostBody{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.openedPostImage{
+    width: 100%;
+}
+
+.openedPostTitle{
+    text-align: center;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    text-transform: uppercase;
+}

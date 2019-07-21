@@ -1,0 +1,58 @@
+#formBody{
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    background: none;
+    text-align: center;
+    width: 100%;
+    visibility:visible !important
+}
+
+input{
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .78);
+    position: relative;
+    width: 90%;
+    height: 50px;
+    padding: 0 16px;
+    font-family: inherit;
+    margin:3px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    margin-right: auto;
+    margin-left: auto;
+}
+form{
+    text-align: center;
+}
+.textArea{
+    box-shadow:0 1px 6px 0 rgba(32, 33, 36, .78);
+    border-radius: 6px;
+    max-width: 90%;
+    min-width: 90%;
+    height: 40px;
+    padding: 0 16px;
+    font-family: inherit;
+    line-height: 40px;
+    margin:3px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    margin-right: auto;
+    margin-left: auto;
+}
+.submitPlace{
+    outline: none;
+    width: 125px;
+    color: black;
+    background-color: white;
+    font-family: quicksand;
+    height: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px -2px rgb(32, 32, 32);
+    transition: 0.5s ease-in-out;
+}

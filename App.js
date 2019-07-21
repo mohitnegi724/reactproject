@@ -21,9 +21,13 @@ app.get('/articles',(req, res)=>{
     posts.find({}).then(responses=>res.json(responses)).catch(err=>res.send(err));
 });
 
+app.get('/article/:alias', (req, res) => {
+    posts.findOne({alias:req.params.alias}).then(responses => res.json(responses)).catch(err => res.send(err));
+});
+
 app.post('/create',async (req, res)=>{
     alias= ()=>{
-        return req.body.title.toLowerCase().split(' ').join("-")
+        return req.body.title.toLowerCase().split(' ').join("-");
     }
     const articleAlias = alias();
     const NewPost={
@@ -36,7 +40,7 @@ app.post('/create',async (req, res)=>{
         imgPictureCredit: req.body.credit,
         alias:articleAlias
     };
-    await posts.create(NewPost).then(data=>res.send(data)).catch(err=>res.send(err));
+    await posts.create(NewPost).then(data=>res.redirect("/")).catch(err=>res.send(err));
 });
 
 app.delete('/delete/:id',(req, res)=>{
@@ -46,6 +50,17 @@ app.delete('/delete/:id',(req, res)=>{
             res.send(err);
         }else{
             res.send("You Successfully Deleted The Post");
+        }
+    });
+});
+
+
+app.delete('/deleteall', (req, res) => {
+    posts.remove({}, (err, success) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send("You Successfully Deleted All The Posts");
         }
     });
 });
