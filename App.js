@@ -26,7 +26,7 @@ app.get('/article/:alias', (req, res) => {
 });
 
 app.post('/create',async (req, res)=>{
-    alias= ()=>{
+    const alias= ()=>{
         return req.body.title.toLowerCase().split(' ').join("-");
     }
     const articleAlias = alias();
@@ -40,7 +40,17 @@ app.post('/create',async (req, res)=>{
         imgPictureCredit: req.body.credit,
         alias:articleAlias
     };
-    await posts.create(NewPost).then(data=>res.redirect("/")).catch(err=>res.send(err));
+    if(alias) {
+        await posts.findOne({
+                    alias
+                }, (err, post) => {
+            if(post){
+                res.send("This Place is Already Listed In Our Database");
+            }else{
+                 posts.create(NewPost).then(data => res.redirect("/")).catch(err => res.send(err));
+            }
+        })
+    }
 });
 
 app.delete('/delete/:id',(req, res)=>{

@@ -1,0 +1,21 @@
+.notFound{
+    font-family: 'Quicksand', cursive;
+    font-weight: bolder;
+    text-align: center;
+    width: 100%;
+    height: 80vh;
+    position: relative;
+}
+
+.innerText{
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+.giphy-embed{
+    width: 100%;
+    height:100%;
+};

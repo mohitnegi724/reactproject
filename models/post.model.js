@@ -1,12 +1,27 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const postSchema = new Schema({
-    title:String,
-    articleBody:String,
-    publishDate:Date,
-    source:String,
+    title:{
+        type: String,
+        required:true
+    },
+    articleBody: {
+        type: String,
+        required: true
+    },
+    publishDate: {
+        type: String,
+        required: true
+    },
+    source: {
+        type: String,
+        required: true
+    },
     contactNumber:Number,
-    image:String,
+    image:{
+        type: String,
+        required:true
+    },
     imgPictureCredit:String,
     alias:{
         type:String,
