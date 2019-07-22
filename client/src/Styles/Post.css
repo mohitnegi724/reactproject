@@ -53,6 +53,7 @@
 
 .openedPostImage{
     width: 100%;
+    max-width: 1000px;
 }
 
 .openedPostTitle{
@@ -60,4 +61,8 @@
     letter-spacing: 1px;
     word-spacing: 2px;
     text-transform: uppercase;
+}
+
+.postImageInfo{
+    text-align: center;
 }

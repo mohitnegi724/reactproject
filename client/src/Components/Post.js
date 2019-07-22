@@ -16,7 +16,7 @@ class Post extends Component {
         </Helmet>
         <div key={_id} className="openedPostBody">
           <h3 className="openedPostTitle">{title}</h3>
-          <div className="imageInfo">
+          <div className="postImageInfo">
             <img src={image} alt={title} className="openedPostImage"/>
             <p>Picture Credits:{imgPictureCredit}</p>
           </div>

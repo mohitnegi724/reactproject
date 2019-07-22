@@ -53,6 +53,19 @@ app.post('/create',async (req, res)=>{
     }
 });
 
+app.put("/update/:alias", (req, res)=>{
+    const {alias} = req.params;
+    posts.findOneAndUpdate({alias},{$set:{
+        "title":"Name Changed"
+    }},(err, post)=>{
+        if(err){
+            res.send(err)
+        }else{
+            res.send(post)
+        }
+    })
+})
+
 app.delete('/delete/:id',(req, res)=>{
     const id = req.params.id;
     posts.findOneAndRemove({_id:id}, (err, success)=>{
