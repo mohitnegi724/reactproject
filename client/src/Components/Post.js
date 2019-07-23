@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {fetchPostFromServer, deletePost,unmountPost} from '../Actions/Actions';
+import PostPlaceholder from '../Components/Placeholders/PostPlaceholder'
 import {connect} from 'react-redux';
 import {Helmet} from 'react-helmet';
 import '../Styles/Post.css';
@@ -12,7 +13,7 @@ class Post extends Component {
     console.log(Alias);
     return (
       <React.Fragment>
-      {this.props.Post!=={}?<div>
+      {Object.keys(this.props.Post).length>0?<div>
         <Helmet>
               <meta charSet="utf-8" />
               <title>{this.props.Post.title}</title>
@@ -23,14 +24,14 @@ class Post extends Component {
             <img src={image} alt={title} className="openedPostImage"/>
             <p>Picture Credits:{imgPictureCredit}</p>
           </div>
-          <p>{publishDate}</p>
+          <p>Publish Date : {new Date(publishDate).toLocaleDateString()}</p>
           <p>{articleBody}</p>
           <strong><p>Source : {source}</p></strong>
         </div>
         <div>
           <button type="delete" onClick={(Alias)=>deleteIndividualPost(Alias)}>Delete This Post</button>
         </div>
-      </div>:<p>Loading</p>}
+      </div>:<PostPlaceholder/>}
     </React.Fragment>
     )
   }

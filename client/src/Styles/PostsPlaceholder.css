@@ -1,0 +1,49 @@
+.placeholderContainer {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 22rem;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+    -webkit-box-shadow: -3px 6px 40px -7px rgba(0, 0, 0, 0.32);
+    box-shadow: -3px 6px 40px -7px rgba(0, 0, 0, 0.32);
+}
+
+.placeholderImage{
+    width: 50%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    float: left;
+    display: inline-block;
+    -webkit-transition: all 0.4s ease-in;
+    -o-transition: all 0.4s ease-in;
+    transition: all 0.4s ease-in;
+    background-color: #d8d9da;
+}
+
+.floatLeft {
+    position: relative;
+    float: left;
+    padding-top: 2px;
+    height: 100%;
+    width: 50%;
+    display:inline-grid
+}
+
+.placeholderTitle {
+    margin: 20px;
+    height: 40px !important;
+    background: #d8d9da;
+}
+
+.placeholderDescription {
+    margin: 10px 30px 20px 30px;
+    background: #d8d9da;
+    height: 15rem;
+    margin: 20px;
+}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {FETCH_POSTS,FETCH_POST,DELETE_POST,POST_UNMOUNT} from './Types';
-export const fetchDataFromServer=()=>dispatch=>{
+export const fetchPostsFromServer=()=>dispatch=>{
     axios.get("/articles")
     .then(db=>{
         return dispatch({type:FETCH_POSTS, Posts:db.data});

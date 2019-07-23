@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {fetchDataFromServer} from '../Actions/Actions';
+import {fetchPostsFromServer} from '../Actions/Actions';
+import PostsPlaceholder from './Placeholders/PostsPlaceholder';
 import {Helmet} from 'react-helmet';
 import '../App.css';
 import '../Styles/Post.css';
 
-class Posts extends Component {
+class Posts extends Component { 
   render() {
     const {Posts} = this.props;
     const showPosts=()=>{
@@ -31,20 +32,20 @@ class Posts extends Component {
     };
     return (
       <div>
-        {this.props.Posts?<div>
+        {Object.keys(this.props.Posts).length>0?<div>
             <Helmet>
               <meta charSet="utf-8"/>
                 <title>
                     MERN Project | mohitnegi.me
                 </title>
           </Helmet>
-        </div>:<p>Loading Posts</p>}
+        </div>:<PostsPlaceholder/>}
         {showPosts()}
       </div>
     )
   }
   componentDidMount(){
-      this.props.dispatchPosts()
+      this.props.dispatchPosts();
   }
 }
 
@@ -56,7 +57,7 @@ const mapStateToProps=state=>{
 }
 
 const mapDispatchToProps={
-        dispatchPosts:fetchDataFromServer
+    dispatchPosts:fetchPostsFromServer
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

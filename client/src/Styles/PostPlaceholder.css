@@ -1,0 +1,67 @@
+.postPlaceholderContainer {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    margin-bottom: 10px;
+    height: 80vh;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+    display: block;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    /* -webkit-box-shadow: -3px 6px 40px -7px rgba(0, 0, 0, 0.32);
+    box-shadow: -3px 6px 40px -7px rgba(0, 0, 0, 0.32); */
+}
+
+.postPlaceholderImage{
+    width: 100%;
+    max-width: 1000px;
+    max-height:600px; 
+    height:80%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -webkit-transition: all 0.4s ease-in;
+    -o-transition: all 0.4s ease-in;
+    transition: all 0.4s ease-in;
+    background-color: #d8d9da;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.info {
+    margin: 0;
+    width: 80%;
+    position: relative;
+    padding-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.postPlaceholderTitle {
+    margin: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 300px;
+    height: 40px !important;
+    background: #d8d9da;
+}
+
+.postPlaceholderDescription {
+    height: 15rem;
+}
+
+.postPlaceholderDate{
+    width: 300px;
+    height: 40px;
+    background: #d8d9da;
+}
+
+.postPlaceholderDetails{
+    margin-top: 5px;
+    width: 100%;
+    height: 200px;
+    background: #d8d9da;
+}
