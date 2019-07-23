@@ -22,7 +22,14 @@ app.get('/articles',(req, res)=>{
 });
 
 app.get('/article/:alias', (req, res) => {
-    posts.findOne({alias:req.params.alias}).then(responses => res.json(responses)).catch(err => res.send(err));
+    posts.findOne({alias:req.params.alias})
+    .then(responses => {
+        res.json(responses)
+    })
+    .catch(err =>{
+        console.log("Error In Finding Article having alias ", alias);
+        res.status(404).json({error:err})
+    });
 });
 
 app.post('/create',async (req, res)=>{
@@ -45,9 +52,10 @@ app.post('/create',async (req, res)=>{
                     alias
                 }, (err, post) => {
             if(post){
+                console.log("The Article having alias ", alias, " is already in Our Database");
                 res.send("This Place is Already Listed In Our Database");
             }else{
-                 posts.create(NewPost).then(data => res.redirect("/")).catch(err => res.send(err));
+                posts.create(NewPost).then(data => res.redirect("/")).catch(err => res.json({err}));
             }
         })
     }
@@ -55,24 +63,18 @@ app.post('/create',async (req, res)=>{
 
 app.put("/update/:alias", (req, res)=>{
     const {alias} = req.params;
-    posts.findOneAndUpdate({alias},{$set:{
-        "title":"Name Changed"
-    }},(err, post)=>{
-        if(err){
-            res.send(err)
-        }else{
-            res.send(post)
-        }
+    posts.findOneAndUpdate({alias}, req.body).then(()=>{
+        posts.findOne({alias}).then(post=>res.send(post))
     })
 })
 
-app.delete('/delete/:id',(req, res)=>{
-    const id = req.params.id;
-    posts.findOneAndRemove({_id:id}, (err, success)=>{
+app.post('/delete/:alias',(req, res)=>{
+    const alias = req.params.alias;
+    posts.findOneAndRemove({alias:alias}, (err, success)=>{
         if(err){
             res.send(err);
         }else{
-            res.send("You Successfully Deleted The Post");
+            res.redirect("/");
         }
     });
 });
@@ -81,7 +83,8 @@ app.delete('/delete/:id',(req, res)=>{
 app.delete('/deleteall', (req, res) => {
     posts.remove({}, (err, success) => {
         if (err) {
-            res.send(err);
+            console.log("Error In Deleting All Articles ", err);
+            res.status(404).send(err);
         } else {
             res.send("You Successfully Deleted All The Posts");
         }

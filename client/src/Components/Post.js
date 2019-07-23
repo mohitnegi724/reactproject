@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import {fetchPostFromServer} from '../Actions/Actions';
+import {fetchPostFromServer, deletePost,unmountPost} from '../Actions/Actions';
 import {connect} from 'react-redux';
 import {Helmet} from 'react-helmet';
 import '../Styles/Post.css';
 
 class Post extends Component {
   render() {
-    const {articleBody, image, imgPictureCredit, publishDate, source,title,_id} = this.props.Post;
+    const {deleteIndividualPost} = this.props;
+    const {articleBody,image, imgPictureCredit, publishDate, source,title,_id} = this.props.Post;
+    const Alias = this.props.match.params.id;
+    console.log(Alias);
     return (
       <React.Fragment>
       {this.props.Post!=={}?<div>
@@ -24,6 +27,9 @@ class Post extends Component {
           <p>{articleBody}</p>
           <strong><p>Source : {source}</p></strong>
         </div>
+        <div>
+          <button type="delete" onClick={(Alias)=>deleteIndividualPost(Alias)}>Delete This Post</button>
+        </div>
       </div>:<p>Loading</p>}
     </React.Fragment>
     )
@@ -31,7 +37,10 @@ class Post extends Component {
   componentDidMount(){
     const {dispatchPost} = this.props;
     const id= this.props.match.params.id;
-    return dispatchPost(id)
+    return dispatchPost(id);
+  }
+  componentWillUnmount(){
+    this.props.unmountPost()
   }
 }
 
@@ -42,7 +51,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  dispatchPost: fetchPostFromServer
+  dispatchPost: fetchPostFromServer,
+  deleteIndividualPost:deletePost,
+  unmountPost
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);
