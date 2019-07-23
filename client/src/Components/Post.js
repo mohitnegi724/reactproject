@@ -10,7 +10,7 @@ class Post extends Component {
     const {deleteIndividualPost} = this.props;
     const {articleBody,image, imgPictureCredit, publishDate, source,title,_id} = this.props.Post;
     const Alias = this.props.match.params.id;
-    console.log(Alias);
+    console.log("Alias ", Alias);
     return (
       <React.Fragment>
       {Object.keys(this.props.Post).length>0?<div>
@@ -24,7 +24,7 @@ class Post extends Component {
             <img src={image} alt={title} className="openedPostImage"/>
             <p>Picture Credits:{imgPictureCredit}</p>
           </div>
-          <p>Publish Date : {new Date(publishDate).toLocaleDateString()}</p>
+          <p>Publish Date : {new Date(Number(publishDate)).toLocaleDateString()}</p>
           <p>{articleBody}</p>
           <strong><p>Source : {source}</p></strong>
         </div>

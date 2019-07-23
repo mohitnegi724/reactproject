@@ -91,9 +91,13 @@ app.delete('/deleteall', (req, res) => {
     });
 });
 
+const PORT = process.env.PORT || 5000;
+console.log("PORT ",PORT)
 
 // mongoURI:"mongodb://usrname:psd@ds231643.mlab.com:31643/reactproject"
 
-app.listen(5000,()=>{
-    console.log("App is listening");
+// mongoURI:"mongodb://mohitnegi724:1234Data@ds353957.mlab.com:53957/reactprojectdev"
+
+app.listen(PORT,()=>{
+    console.log("App is listening on Port" , PORT);
 });
