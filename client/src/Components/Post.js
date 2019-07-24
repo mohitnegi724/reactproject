@@ -8,7 +8,15 @@ import '../Styles/Post.css';
 class Post extends Component {
   render() {
     const {deleteIndividualPost} = this.props;
-    const {articleBody,image, imgPictureCredit, publishDate, source,title,_id} = this.props.Post;
+    const {
+      articleBody,
+      image,
+      imgPictureCredit,
+      publishDate,
+      source,
+      title,
+      _id
+    } = this.props.Post;
     const Alias = this.props.match.params.id;
     console.log("Alias ", Alias);
     return (
@@ -27,9 +35,11 @@ class Post extends Component {
           <p>Publish Date : {new Date(Number(publishDate)).toLocaleDateString()}</p>
           <p>{articleBody}</p>
           <strong><p>Source : {source}</p></strong>
-        </div>
-        <div>
-          <button type="delete" onClick={(Alias)=>deleteIndividualPost(Alias)}>Delete This Post</button>
+          <button type = "delete"
+          className = "deleteButton"
+          onClick = {() => deleteIndividualPost(this.props.match.params.id)}> 
+            Delete This Post
+          </button>
         </div>
       </div>:<PostPlaceholder/>}
     </React.Fragment>

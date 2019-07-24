@@ -58,6 +58,8 @@ app.post('/create',async (req, res)=>{
                 posts.create(NewPost).then(data => res.redirect("/")).catch(err => res.json({err}));
             }
         })
+    }else{
+        res.send("Err In Creating Alias")
     }
 });
 
@@ -70,13 +72,9 @@ app.put("/update/:alias", (req, res)=>{
 
 app.post('/delete/:alias',(req, res)=>{
     const alias = req.params.alias;
-    posts.findOneAndRemove({alias:alias}, (err, success)=>{
-        if(err){
-            res.send(err);
-        }else{
-            res.redirect("/");
-        }
-    });
+    posts.findOneAndRemove({alias:alias})
+    .then(()=>res.redirect("/"))
+    .catch(err=>res.send(err))
 });
 
 
@@ -92,11 +90,7 @@ app.delete('/deleteall', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-console.log("PORT ",PORT)
-
-// mongoURI:"mongodb://usrname:psd@ds231643.mlab.com:31643/reactproject"
-
-// mongoURI:"mongodb://mohitnegi724:1234Data@ds353957.mlab.com:53957/reactprojectdev"
+console.log("PORT ",PORT);
 
 app.listen(PORT,()=>{
     console.log("App is listening on Port" , PORT);

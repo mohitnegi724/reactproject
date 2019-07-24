@@ -21,19 +21,19 @@ export const fetchPostFromServer=id=>dispatch=>{
 
 export const deletePost=alias=>dispatch=>{
     axios.post("/delete/"+alias)
-    .then(alias=>{
+    .then(()=>{
         return dispatch({
             type:DELETE_POST,
             postId:alias
-        })
+        });
     })
     .catch(err => console.log(err));
-}
+};
 
 
 export const unmountPost=()=>dispatch=>{
     return dispatch({
         type:POST_UNMOUNT,
         Post:{}
-    })
-}
+    });
+};

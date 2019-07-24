@@ -66,3 +66,20 @@
 .postImageInfo{
     text-align: center;
 }
+
+.deleteButton{
+    transition: 0.9s ease-in-out;
+    cursor: pointer;
+    margin-top: 0;
+    top: 10px;
+    outline: none;
+    position: relative;
+    color: white;
+    border: none;
+    background-color: #dc3545;
+    height: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
