@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FETCH_POSTS,FETCH_POST,DELETE_POST,POST_UNMOUNT} from './Types';
+import {FETCH_POSTS,FETCH_POST,DELETE_POST,POST_UNMOUNT,NO_POST_FOUND} from './Types';
 export const fetchPostsFromServer=()=>dispatch=>{
     axios.get("/articles")
     .then(db=>{
@@ -9,14 +9,11 @@ export const fetchPostsFromServer=()=>dispatch=>{
 };
 
 export const fetchPostFromServer=id=>dispatch=>{
-    axios.get("/article/"+id)
-        .then(db => {
-            return dispatch({
-                type: FETCH_POST,
-                Post: db.data
-            });
-        })
-        .catch(err => console.log(err));
+    const postId = axios.get("/article/"+id)
+    postId.then(db =>dispatch({type: FETCH_POST,Post: db.data, status:db.status}))
+    .catch(err =>{
+        return dispatch({type: NO_POST_FOUND, Post:{status:err.response.status}})
+    })
 }
 
 export const deletePost=alias=>dispatch=>{

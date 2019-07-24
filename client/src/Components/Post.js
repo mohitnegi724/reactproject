@@ -18,7 +18,14 @@ class Post extends Component {
       _id
     } = this.props.Post;
     const Alias = this.props.match.params.id;
-    console.log("Alias ", Alias);
+    const deleteFunc=()=>{
+      deleteIndividualPost(Alias);
+      this.props.history.push("/")
+    }
+    const goBack=()=>{
+      this.props.history.goBack()
+    }
+
     return (
       <React.Fragment>
       {Object.keys(this.props.Post).length>0?<div>
@@ -26,6 +33,9 @@ class Post extends Component {
               <meta charSet="utf-8" />
               <title>{this.props.Post.title}</title>
         </Helmet>
+        <button className="backButton" onClick={()=>goBack()}>
+              Go Back
+        </button>
         <div key={_id} className="openedPostBody">
           <h3 className="openedPostTitle">{title}</h3>
           <div className="postImageInfo">
@@ -37,11 +47,12 @@ class Post extends Component {
           <strong><p>Source : {source}</p></strong>
           <button type = "delete"
           className = "deleteButton"
-          onClick = {() => deleteIndividualPost(this.props.match.params.id)}> 
+          onClick = {() =>deleteFunc()}> 
             Delete This Post
           </button>
         </div>
-      </div>:<PostPlaceholder/>}
+      </div>:<PostPlaceholder/>
+    }
     </React.Fragment>
     )
   }
@@ -57,7 +68,7 @@ class Post extends Component {
 
 const mapStateToProps = state => {
   return {
-    Post: state.Post
+    Post: state.Post,
   }
 }
 

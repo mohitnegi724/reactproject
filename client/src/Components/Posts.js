@@ -14,19 +14,19 @@ class Posts extends Component {
         return Posts.map(post=>{
             const {_id, alias,title,image, imgPictureCredit, source,articleBody} = post;
             return(
-                <Link to={"/article/"+alias} key={_id}>
                     <div key={_id} className="articleBody">
                         <div className="ImageInfo">
                             <img src={image} alt={title} className="articleImage"/>
                             {imgPictureCredit ?<p className="pictureCredits">{imgPictureCredit}</p> :null}
                         </div>
+                        <Link to={"/article/"+alias} key={_id}>
                         <div className="articleDesc">
                             <h3 className="articleTitle">{title}</h3>
                             <p >{articleBody}</p>
                             <p>Source :{source}</p>
                         </div>
+                        </Link>
                     </div>
-                </Link>
             )
         });
     };

@@ -18,18 +18,17 @@ app.get('/',(req, res)=>{
 });
 
 app.get('/articles',(req, res)=>{
-    posts.find({}).then(responses=>res.json(responses)).catch(err=>res.send(err));
+    posts.find({}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
 });
 
 app.get('/article/:alias', (req, res) => {
-    posts.findOne({alias:req.params.alias})
-    .then(responses => {
-        res.json(responses)
+    posts.findOne({alias:req.params.alias}, (err, post)=>{
+        if(!post){
+            res.status(404).send("err in Fetching Article")
+        }else{
+            res.send(post);
+        }
     })
-    .catch(err =>{
-        console.log("Error In Finding Article having alias ", alias);
-        res.status(404).json({error:err})
-    });
 });
 
 app.post('/create',async (req, res)=>{
