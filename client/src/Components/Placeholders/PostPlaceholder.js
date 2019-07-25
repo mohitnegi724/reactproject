@@ -1,11 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import '../../Styles/PostPlaceholder.css';
 
-
-class PostPlaceholder extends Component {
-    render() {
-        return(
-            <React.Fragment>
+const PostPlaceholder =()=>{
+    return(
+        <React.Fragment>
                 <div className="postPlaceholderContainer">
                     <div className="postPlaceholderTitle">
                     </div>
@@ -20,13 +18,8 @@ class PostPlaceholder extends Component {
                         </div>
                     </div>
                 </div>
-            </React.Fragment>
-        )
-    }
-    componentDidMount(){
-        console.log("Placeholder updated");
-        
-    }
+        </React.Fragment>
+    )
 }
 
 export default PostPlaceholder;

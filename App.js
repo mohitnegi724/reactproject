@@ -62,10 +62,10 @@ app.post('/create',async (req, res)=>{
     }
 });
 
-app.put("/update/:alias", (req, res)=>{
+app.put("/update/article/:alias", (req, res)=>{
     const {alias} = req.params;
     posts.findOneAndUpdate({alias}, req.body).then(()=>{
-        posts.findgmailOne({alias}).then(post=>res.send(post))
+        posts.findOne({alias}).then(post=>res.json(post))
     })
 })
 

@@ -103,3 +103,21 @@
     padding-right: 5px;
     padding-left: 5px;
 }
+
+.updateButton {
+    transition: 0.9s ease-in-out;
+    cursor: pointer;
+    margin-top: 0;
+    top: 10px;
+    outline: none;
+    position: relative;
+    color: white;
+    border: none;
+    background-color: #fc9e23;
+    height: 40px;
+    float: right;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+}

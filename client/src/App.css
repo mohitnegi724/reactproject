@@ -3,6 +3,8 @@ body {
   height: 0;
   font-family: 'Quicksand',
   sans-serif;
+  height: 100%;
+  width: 100%;
 }
 a {
   color: inherit;
@@ -53,6 +55,7 @@ header h4 {
 }
 
 .container {
+  height: 100%;
   margin-top: 80px;
   position: relative;
   padding-bottom: 50px;

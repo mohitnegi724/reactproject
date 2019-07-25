@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import {Helmet} from 'react-helmet';
+import {UpdatePost} from '../Actions/Actions';
+import {connect} from 'react-redux';
 import '../Styles/AddPlace.css';
 
 class Update extends Component {
   render() {
+    const {Post} = this.props;
+    console.log("updatePost ", Post);
     return (
-      <div id="formBody">
+      <div>
+      {Object.keys(Post)>0?<div id="formBody">
         <Helmet>
             <meta char="utf-8"/>
               <title>
@@ -14,17 +19,31 @@ class Update extends Component {
         </Helmet>
         <div className="Form">
           <form method="put" action="/update">
-            <input type="text" name="title" placeholder="Place Name" required/>
-            <textarea className="textArea"type="text" name="articleBody" placeholder="Place Description" required/>
-            <input type="text" name="source" placeholder="Information Source" required/>
-            <input type="text" name="image" placeholder="Image Link" required/>
-            <input type="text" name="credit" placeholder="credit"/>
+            <input value={Post.title} type="text" name="title" placeholder="Place Name" required/>
+            <textarea className="textArea"type="text" name="articleBody" placeholder="Place Description" value={Post.articleBody} required/>
+            <input type="text" name="source" placeholder="Information Source" value={Post.source} required/>
+            <input type="text" name="image" placeholder="Image Link" value={Post.image} required/>
+            <input type="text" name="credit" placeholder="credit" value={Post.imgpictureCredit}/>
             <button type="submit" value="Submit" className="submitPlace">Add Place</button>
           </form>
         </div>
+      </div>:<div><p id="statusBanner">This Service Would Be Availabe Soon. Thanks For Visting Us</p></div>}
       </div>
     )
   }
+  componentDidMount(){
+    this.props.UpdatePost(this.props.match.params.id)
+  }
 }
 
-export default Update;
+const mapStateToProps=state=>{
+  return{
+    Post:state.Post
+  }
+}
+
+const maptDispatchToProps={
+  UpdatePost
+}
+
+export default connect(mapStateToProps, maptDispatchToProps)(Update);
