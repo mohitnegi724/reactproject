@@ -14,19 +14,19 @@ mongoose.connect(Keys.mongoURI, {
 },() => console.log("Database Connected"));
 
 app.get('/',(req, res)=>{
-    posts.find({}).then(responses => res.json(responses)).catch(err => res.send(err));
+    res.sendFile()
 });
 
 app.get('/articles',(req, res)=>{
     posts.find({}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
 });
 
-app.get('/article/:alias', (req, res) => {
-    posts.findOne({alias:req.params.alias}, (err, post)=>{
+app.get('/article/:alias', async(req, res) => {
+    await posts.findOne({alias:req.params.alias}, (err, post)=>{
         if(!post){
             res.status(404).send("err in Fetching Article")
         }else{
-            res.send(post);
+            res.json(post);
         }
     })
 });
@@ -65,20 +65,20 @@ app.post('/create',async (req, res)=>{
 app.put("/update/:alias", (req, res)=>{
     const {alias} = req.params;
     posts.findOneAndUpdate({alias}, req.body).then(()=>{
-        posts.findOne({alias}).then(post=>res.send(post))
+        posts.findgmailOne({alias}).then(post=>res.send(post))
     })
 })
 
-app.post('/delete/:alias',(req, res)=>{
-    const alias = req.params.alias;
-    posts.findOneAndRemove({alias:alias})
+app.post('/delete/:alias',async (req, res)=>{
+    const alias = await req.params.alias;
+    await posts.findOneAndRemove({alias:alias})
     .then(()=>res.redirect("/"))
     .catch(err=>res.send(err))
 });
 
 
-app.delete('/deleteall', (req, res) => {
-    posts.remove({}, (err, success) => {
+app.delete('/deleteall', async(req, res) => {
+    await posts.remove({}, (err, success) => {
         if (err) {
             console.log("Error In Deleting All Articles ", err);
             res.status(404).send(err);
@@ -89,8 +89,6 @@ app.delete('/deleteall', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-console.log("PORT ",PORT);
-
 app.listen(PORT,()=>{
     console.log("App is listening on Port" , PORT);
 });
