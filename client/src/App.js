@@ -5,6 +5,7 @@ import Header from './Components/Header';
 import AddPlace from './Components/AddPlace';
 import Notfound from './Components/NotFound';
 import {BrowserRouter,Route, Switch} from 'react-router-dom';
+import Update from './Components/Update';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
                   <Route exact path="/" component={Posts}/>
                   <Route path="/article/:id" component={Post}/>
                   <Route path="/addplace" component={AddPlace}/>
+                  <Route path="/update/article/:id" component={Update}/>
                   <Route path="*" component={Notfound}/>
                 </Switch>
           </div>

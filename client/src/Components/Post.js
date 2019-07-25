@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import {fetchPostFromServer, deletePost,unmountPost} from '../Actions/Actions';
-import PostPlaceholder from '../Components/Placeholders/PostPlaceholder'
+import {fetchPostFromServer, deletePost,unmountPost,UpdatePost} from '../Actions/Actions';
+import PostPlaceholder from '../Components/Placeholders/PostPlaceholder';
 import {connect} from 'react-redux';
 import {Helmet} from 'react-helmet';
 import '../Styles/Post.css';
 
 class Post extends Component {
   render() {
-    const {deleteIndividualPost} = this.props;
+    const {deleteIndividualPost,updateFunc} = this.props;
     const {
       articleBody,
       image,
@@ -18,13 +18,20 @@ class Post extends Component {
       _id
     } = this.props.Post;
     const Alias = this.props.match.params.id;
+    
     const deleteFunc=()=>{
       deleteIndividualPost(Alias);
-      this.props.history.push("/")
-    }
+      this.props.history.push("/");
+    };
+    
+    const updateFunction=()=>{
+      updateFunc(Alias);
+      this.props.history.push("/update/article/" + Alias);
+    };
+
     const goBack=()=>{
-      this.props.history.goBack()
-    }
+      this.props.history.goBack();
+    };
 
     return (
       <React.Fragment>
@@ -49,6 +56,12 @@ class Post extends Component {
           className = "deleteButton"
           onClick = {() =>deleteFunc()}> 
             Delete This Post
+          </button>
+
+          <button type="button"
+          className = "updateButton"
+          onClick = {() =>updateFunction()}> 
+            Update This Post
           </button>
         </div>
       </div>:<PostPlaceholder/>
@@ -75,7 +88,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   dispatchPost: fetchPostFromServer,
   deleteIndividualPost:deletePost,
-  unmountPost
+  unmountPost,
+  updateFunc: UpdatePost
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

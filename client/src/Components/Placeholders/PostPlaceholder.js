@@ -23,10 +23,6 @@ class PostPlaceholder extends Component {
             </React.Fragment>
         )
     }
-    componentDidMount(){
-        console.log("Placeholder updated");
-        
-    }
 }
 
 export default PostPlaceholder;
