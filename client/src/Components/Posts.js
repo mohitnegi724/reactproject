@@ -12,7 +12,9 @@ class Posts extends Component {
     const {Posts} = this.props;
     const showPosts=()=>{
         return Posts.map(post=>{
-            const {_id, alias,title,image, imgPictureCredit, source,articleBody} = post;
+            const {_id, alias,title,image, imgPictureCredit,articleBody} = post;
+            const readMore=()=>articleBody.slice(0,150);
+            console.log(readMore());
             return(
                     <div key={_id} className="articleBody">
                         <div className="ImageInfo">
@@ -21,9 +23,9 @@ class Posts extends Component {
                         </div>
                         <Link to={"/article/"+alias} key={_id}>
                         <div className="articleDesc">
-                            <h3 className="articleTitle">{title}</h3>
-                            <p >{articleBody}</p>
-                            <p>Source :{source}</p>
+                            <h4 className="articleTitle">{title.toUpperCase()}</h4>
+                            <p>{readMore()}...</p>
+                            <button className="readMore">Read More....</button>
                         </div>
                         </Link>
                     </div>

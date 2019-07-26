@@ -19,6 +19,7 @@ class AddPlace extends Component {
             <input type="text" name="source" placeholder="Information Source" required/>
             <input type="text" name="image" placeholder="Image Link" required/>
             <input type="text" name="credit" placeholder="credit"/>
+            <br/>
             <button type="submit" value="Submit" className="submitPlace">Add Place</button>
           </form>
         </div>

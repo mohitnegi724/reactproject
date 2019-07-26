@@ -14,21 +14,21 @@ mongoose.connect(Keys.mongoURI, {
 },() => console.log("Database Connected"));
 
 app.get('/',(req, res)=>{
-    res.sendFile()
+    res.sendFile();
 });
 
 app.get('/articles',(req, res)=>{
-    posts.find({}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
+    posts.find({}).sort({"publishDate":-1}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
 });
 
-app.get('/article/:alias', async(req, res) => {
-    await posts.findOne({alias:req.params.alias}, (err, post)=>{
+app.get('/article/:alias',(req, res) => {
+    posts.findOne({alias:req.params.alias}, (err, post)=>{
         if(!post){
             res.status(404).send("err in Fetching Article")
         }else{
             res.json(post);
         }
-    })
+    });
 });
 
 app.post('/create',async (req, res)=>{
@@ -57,8 +57,6 @@ app.post('/create',async (req, res)=>{
                 posts.create(NewPost).then(data => res.redirect("/")).catch(err => res.json({err}));
             }
         })
-    }else{
-        res.send("Err In Creating Alias")
     }
 });
 

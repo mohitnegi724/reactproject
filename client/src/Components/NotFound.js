@@ -14,6 +14,3 @@ export default function NotFound() {
         </div>
     )
 }
-
-
-// https://media.giphy.com/media/xT0BKFyZt9MMx9xkpW/giphy.gif
