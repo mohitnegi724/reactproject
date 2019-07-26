@@ -36,7 +36,6 @@ class Post extends Component {
 
     const showPost=()=>{
       if(Object.keys(this.props.Post).length>0){
-        console.log(status);
         return(
           <div>
             <Helmet>

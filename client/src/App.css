@@ -1,6 +1,4 @@
 body {
-  margin: 0;
-  height: 0;
   font-family: 'Lato', sans-serif;
   height: 100%;
   width: 100%;
@@ -58,4 +56,21 @@ header h4 {
   margin-top: 80px;
   position: relative;
   padding-bottom: 50px;
+}
+
+
+@media screen and (max-width: 600px) {
+  header{
+    width: 95%;
+    padding-right: 0;
+  }
+  .addPlaceButton{
+    border-radius: 10px 0 0 10px;
+    font-size: 10px;
+    color: black;
+    background: white;
+  }
+  .container{
+    margin-top: 65px;
+  }
 }

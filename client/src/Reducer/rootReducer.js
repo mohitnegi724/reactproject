@@ -21,7 +21,6 @@ const rootReducer=(state=DEFAULT_STATE, action)=>{
                 actionMessage: action.actionMessage
             }
         case FETCH_POST:
-            console.log("FETCH_POST ", action)
             return {
                 ...state,
                 Post: action.Post,
@@ -29,14 +28,12 @@ const rootReducer=(state=DEFAULT_STATE, action)=>{
                 actionMessage: action.actionMessage
             }
         case NO_POST_FOUND:
-            console.log("FETCH_POST 404Error ", action)
             return {
                 ...state,
                 postStatus:action.status,
                 actionMessage: action.actionMessage
             }
         case DELETE_POST:
-            console.log("Delete post ", action)
             return{
                 ...state,
                 actionMessage: action.actionMessage
@@ -48,7 +45,6 @@ const rootReducer=(state=DEFAULT_STATE, action)=>{
             actionMessage: action.actionMessage
         }
         case POST_UPDATE:
-            console.log("Post Update ", action)
             return {
                 ...state,
                 Post: action.Post,

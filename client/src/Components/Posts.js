@@ -14,40 +14,41 @@ class Posts extends Component {
         return Posts.map(post=>{
             const {_id, alias,title,image, imgPictureCredit,articleBody} = post;
             const readMore=()=>articleBody.slice(0,150);
-            console.log(readMore());
             return(
                     <div key={_id} className="articleBody">
                         <div className="ImageInfo">
                             <img src={image} alt={title} className="articleImage"/>
                             {imgPictureCredit ?<p className="pictureCredits">{imgPictureCredit}</p> :null}
                         </div>
-                        <Link to={"/article/"+alias} key={_id}>
                         <div className="articleDesc">
+                          <Link to={"/article/"+alias} key={_id}>
+                            <React.Fragment>
                             <p className="articleTitle">{title.toUpperCase()}</p>
-                            <p>{readMore()}...</p>
+                            <p className="para">{readMore()}...</p>
                             <button className="readMore">Read More....</button>
+                            </React.Fragment>
+                          </Link>
                         </div>
-                        </Link>
                     </div>
             )
         });
     };
     return (
-      <div>
-        {Object.keys(this.props.Posts).length>0?<div>
+      <React.Fragment>
+        {Object.keys(this.props.Posts).length<0?<React.Fragment>
             <Helmet>
               <meta charSet="utf-8"/>
                 <title>
                     MERN Project | mohitnegi.me
                 </title>
           </Helmet>
-        </div>:<PostsPlaceholder/>}
+        </React.Fragment>:<PostsPlaceholder/>}
         {showPosts()}
-      </div>
+      </React.Fragment>
     )
   }
   componentDidMount(){
-      this.props.dispatchPosts();
+    this.props.dispatchPosts();
   }
 }
 

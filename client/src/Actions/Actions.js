@@ -18,7 +18,6 @@ export const fetchPostsFromServer=()=>dispatch=>{
 export const fetchPostFromServer=id=>dispatch=>{
     const postId = axios.get("/article/"+id)
     postId.then(db =>{
-        console.log(db.status);
         dispatch({type: FETCH_POST,Post: db.data, status:db.status,actionMessage:"Fetching Post"})
     })
     .catch(err =>{

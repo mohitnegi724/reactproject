@@ -144,3 +144,72 @@
     padding-right: 10px;
     padding-left: 10px;
 }
+
+
+/* --------------------------------------------------------------------------- */
+
+@media screen and (max-width: 600px) {
+    .articleBody{
+        position: relative;
+        display: inline-block;
+        margin-right: 5%;
+        margin-left: 5%;
+        margin-top: 5px;
+        height: inherit !important;
+        width: 90%;
+    }
+    .ImageInfo{
+        width: 100%;
+        position: relative;
+        min-height: 1px;
+        overflow: hidden;
+        display: inline-block;
+    }  
+    .articleImage{
+        height: 150px !important;
+    }
+    .articleDesc{
+        position: relative;
+        width: 100%;
+        margin:0;
+        padding: 0;
+        height: 120px;
+    }
+    .articleTitle{
+        margin: 0;
+        padding: 0;
+    }
+    .para{
+        margin: 2px;
+        font-size: 12px;
+    }
+    .readMore{
+        background: #0f0c29;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        margin-right: auto;
+        margin-left: auto;
+        font-size: 7px;
+        position: relative;
+        width: 100px;
+        height: 30px;
+    }
+    .backButton{
+        display: none;
+    }
+    .deleteButton{
+        width: 100px;
+        font-size: 8px;
+    }
+    .updateButton{
+        width: 100px;
+        font-size: 8px;
+    }
+    .openedPostBody{
+        text-align: justify;
+        font-size: 15px;
+    }
+    .openedPostTitle{
+        font-size: 15px;
+    }
+};

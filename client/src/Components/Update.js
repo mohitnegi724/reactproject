@@ -63,6 +63,12 @@ class Update extends Component {
             
             
             <input type="text" name="credit" placeholder="credit" defaultValue={imgPictureCredit} onChange={(e)=>dataChangeHandler(e)}/>
+
+            <label>Source</label>
+            <br/>
+            
+            
+            <input type="text" name="source" placeholder="credit" defaultValue={source} onChange={(e)=>dataChangeHandler(e)}/>
             
             <button type="submit" value="Submit" className="submitPlace">Update Place</button>
           </form>
