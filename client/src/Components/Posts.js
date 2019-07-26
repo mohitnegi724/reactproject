@@ -23,7 +23,7 @@ class Posts extends Component {
                         </div>
                         <Link to={"/article/"+alias} key={_id}>
                         <div className="articleDesc">
-                            <h4 className="articleTitle">{title.toUpperCase()}</h4>
+                            <p className="articleTitle">{title.toUpperCase()}</p>
                             <p>{readMore()}...</p>
                             <button className="readMore">Read More....</button>
                         </div>
