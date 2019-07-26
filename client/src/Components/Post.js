@@ -8,6 +8,7 @@ import '../Styles/Post.css';
 
 class Post extends Component {
  render() {
+   console.log("Checking React ",this.props);
     const {deleteIndividualPost,updateFunc} = this.props;
     const {
       articleBody,
@@ -86,6 +87,7 @@ class Post extends Component {
     )
   }
   componentDidMount(){
+    window.scrollTo(0, 0);
     const {dispatchPost} = this.props;
     const id= this.props.match.params.id;
     return dispatchPost(id);

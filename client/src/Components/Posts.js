@@ -35,7 +35,7 @@ class Posts extends Component {
     };
     return (
       <React.Fragment>
-        {Object.keys(this.props.Posts).length<0?<React.Fragment>
+        {Object.keys(this.props.Posts).length>0?<React.Fragment>
             <Helmet>
               <meta charSet="utf-8"/>
                 <title>

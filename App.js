@@ -4,6 +4,7 @@ var Keys = require('./keys/mongodb');
 var posts = require("./models/post.model.js");
 var mongoose = require('mongoose');
 var cors = require("cors");
+const path = require('path');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,9 +14,9 @@ mongoose.connect(Keys.mongoURI, {
     useNewUrlParser: true
 },() => console.log("Database Connected"));
 
-app.get('/',(req, res)=>{
-    res.sendFile();
-});
+// app.get('/',(req, res)=>{
+//     res.sendFile();
+// });
 
 app.get('/articles',(req, res)=>{
     posts.find({}).sort({"publishDate":-1}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
@@ -87,6 +88,15 @@ app.delete('/deleteall', async(req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
+
+if (process.env.NODE_ENV==="production"){
+    app.use(express.static('client/build'));
+
+    app.get("*", (req, res)=>{
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+    })
+}
+
 app.listen(PORT,()=>{
     console.log("App is listening on Port" , PORT);
 });
