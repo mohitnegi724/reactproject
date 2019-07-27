@@ -23,10 +23,15 @@ input{
     margin-right: auto;
     margin-left: auto;
 }
+.Form{
+   margin-right: auto;
+   margin-left: auto;
+   width: 80%;
+}
 form{
         margin-right: auto;
         margin-left: auto;
-        width: 80%;
+        width: 100%;
 }
 .textArea{
     box-shadow:0 1px 6px 0 rgba(32, 33, 36, .78);
@@ -87,6 +92,8 @@ label{
     cursor: pointer;
     box-shadow: 0px 2px 4px -2px rgb(32, 32, 32);
     transition: 0.5s ease-in-out;
+    margin-right: auto;
+    margin-left: auto
 }
 
 @media screen and (max-width: 600px) {
