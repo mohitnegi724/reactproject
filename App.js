@@ -53,7 +53,7 @@ app.post('/create',async (req, res)=>{
     .then(data => res.redirect("/"))
     .catch(err =>{
         const alias = () => {
-            return req.body.title.toLowerCase().split(' ').join("-")-shortid.generate();
+            return req.body.title.toLowerCase().split(' ').join("-")+shortid.generate();
         }
         const articleAlias = alias();
         console.log(articleAlias);
