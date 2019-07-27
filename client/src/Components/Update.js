@@ -34,25 +34,25 @@ class Update extends Component {
         <div className="Form">
           <form method="post" action={`/update/article/${alias}`}>
             <label>Title</label>
-            <input value={title} onChange={(e)=>dataChangeHandler(e)} type="text" name="title" placeholder="Place Name" required/>
+            <input defaultValue={title} onChange={(e)=>dataChangeHandler(e)} type="text" name="title" placeholder="Place Name" required/>
             <br/>
             <label>Article Body</label>
-            <textarea value={articleBody} onChange={(e)=>dataChangeHandler(e)} className="textArea"type="text" name="articleBody" placeholder="Place Description" required/>
+            <textarea defaultValue={articleBody} onChange={(e)=>dataChangeHandler(e)} className="textArea"type="text" name="articleBody" placeholder="Place Description" required/>
             <br/>
             <label>Information Source</label>
-            <input value={source} onChange={(e)=>dataChangeHandler(e)} type="text" name="source" placeholder="Information Source"/>
+            <input defaultValue={source} onChange={(e)=>dataChangeHandler(e)} type="text" name="source" placeholder="Information Source"/>
             <br/>
             <label>Information Source Link</label>
-            <input value={sourceLink} onChange={(e)=>dataChangeHandler(e)} type="text" name="sourceLink" placeholder="Information Source Link"/>
+            <input defaultValue={sourceLink} onChange={(e)=>dataChangeHandler(e)} type="text" name="sourceLink" placeholder="Information Source Link"/>
             <br/>
             <label>Image</label>
-            <input value={image} onChange={(e)=>dataChangeHandler(e)} type="text" name="image" placeholder="Image Link" required/>
+            <input defaultValue={image} onChange={(e)=>dataChangeHandler(e)} type="text" name="image" placeholder="Image Link" required/>
             <br/>
             <label>Picture Credits</label>
-            <input value={imgPictureCredit} onChange={(e)=>dataChangeHandler(e)} type="text" name="imgPictureCredit" placeholder="Picture Credits"/>
+            <input defaultValue={imgPictureCredit} onChange={(e)=>dataChangeHandler(e)} type="text" name="imgPictureCredit" placeholder="Picture Credits"/>
             <br/>
             <label>Picture Credits</label>
-            <input value={imgPictureCreditLink} onChange={(e)=>dataChangeHandler(e)} type="text" name="imgPictureCreditLink" placeholder="Picture Credit's Link"/>
+            <input defaultValue={imgPictureCreditLink} onChange={(e)=>dataChangeHandler(e)} type="text" name="imgPictureCreditLink" placeholder="Picture Credit's Link"/>
             <br/>
             <button type="submit" value="Submit" className="submitPlace">Update Place</button>
           </form>
