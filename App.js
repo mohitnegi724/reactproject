@@ -10,13 +10,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-mongoose.connect(Keys.mongoURI, {
+// Step 01
+const PORT = process.env.PORT || 5000;
+
+// Step 02
+mongoose.connect(process.env.MONGODB_URI || Keys.mongoURI, {
     useNewUrlParser: true
 },() => console.log("Database Connected"));
 
-// app.get('/',(req, res)=>{
-//     res.sendFile();
-// });
+app.get('/',(req, res)=>{
+    res.send("Welcome Home!");
+});
 
 app.get('/articles',(req, res)=>{
     posts.find({}).sort({"publishDate":-1}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
@@ -87,16 +91,16 @@ app.delete('/deleteall', async(req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 5000;
-
+// Step 03
 if (process.env.NODE_ENV==="production"){
     app.use(express.static('client/build'));
 
     app.get("*", (req, res)=>{
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+        res.sendFile(path.join(__dirname, "client", "build", "index.html"))
     })
 }
 
+// Step 04
 app.listen(PORT,()=>{
     console.log("App is listening on Port" , PORT);
 });

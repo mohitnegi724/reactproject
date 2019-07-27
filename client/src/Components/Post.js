@@ -54,7 +54,7 @@ class Post extends Component {
               </div>
               <p>Publish Date : {new Date(Number(publishDate)).toLocaleDateString()}</p>
               <p>{articleBody}</p>
-              <strong><p>Source : {source}</p></strong>
+              <strong><p>Source : <a href={source} target="_blank" rel="noopener noreferrer">{source}</a></p></strong>
               <button type = "delete"
               className = "deleteButton"
               onClick = {() =>deleteFunc()}> 
