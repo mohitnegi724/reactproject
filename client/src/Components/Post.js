@@ -57,15 +57,15 @@ class Post extends Component {
               <h3 className="openedPostTitle">{title}</h3>
               <div className="postImageInfo">
                 <img src={image} alt={title} className="openedPostImage"/>
-                <p>Picture Credits: <a href={imgPictureCreditLink}>{imgPictureCredit}</a></p>
+                <p>Picture Credits: <a href={imgPictureCreditLink} target="_blank" rel="noopener noreferrer">{imgPictureCredit}</a></p>
               </div>
               <p>Publish Date : {new Date(Number(publishDate)).toLocaleDateString()}</p>
               <p>{articleBody}</p>
               <strong><p>Source : <a href={sourceLink} target="_blank" rel="noopener noreferrer">{source}</a></p></strong>
               <button type = "delete"
               className = "deleteButton"
-              onClick = {() =>deleteFunc()}> 
-                Delete This Post
+              onClick = {() =>deleteFunc()} disabled> 
+                Disabled Delete Button
               </button>
 
               <button type="button"

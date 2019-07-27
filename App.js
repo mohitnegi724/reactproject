@@ -4,6 +4,7 @@ var Keys = require('./keys/mongodb');
 var posts = require("./models/post.model.js");
 var mongoose = require('mongoose');
 var cors = require("cors");
+const shortid = require("shortid");
 const path = require('path');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -48,18 +49,27 @@ app.post('/create',async (req, res)=>{
         imgPictureCredit: req.body.imgPictureCredit,
         imgPictureCreditLink: req.body.imgPictureCreditLink,
     };
-    if(alias) {
-        await posts.findOne({
-                    alias
-                }, (err, post) => {
-            if(post){
-                console.log("The Article having alias ", alias, " is already in Our Database");
-                res.send("This Place is Already Listed In Our Database");
-            }else{
-                posts.create(NewPost).then(data => res.redirect("/")).catch(err => res.json({err}));
-            }
-        })
-    }
+    await posts.create(NewPost)
+    .then(data => res.redirect("/"))
+    .catch(err =>{
+        const alias = () => {
+            return req.body.title.toLowerCase().split(' ').join("-")-shortid.generate();
+        }
+        const articleAlias = alias();
+        console.log(articleAlias);
+        const NewPost={
+        title:req.body.title,
+        alias: articleAlias,
+        articleBody:req.body.articleBody,
+        publishDate: Date.now(),
+        source:req.body.source,
+        sourceLink: req.body.sourceLink,
+        image: req.body.image,
+        imgPictureCredit: req.body.imgPictureCredit,
+        imgPictureCreditLink: req.body.imgPictureCreditLink,
+        };
+        posts.create(NewPost).then(()=>res.redirect("/")).catch(err=>res.send(err));
+    });
 });
 
 app.post("/update/article/:alias", (req, res)=>{
