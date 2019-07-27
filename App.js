@@ -18,10 +18,6 @@ mongoose.connect(process.env.MONGODB_URI || Keys.mongoURI, {
     useNewUrlParser: true
 },() => console.log("Database Connected"));
 
-app.get('/',(req, res)=>{
-    res.send("Welcome Home!");
-});
-
 app.get('/articles',(req, res)=>{
     posts.find({}).sort({"publishDate":-1}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
 });
