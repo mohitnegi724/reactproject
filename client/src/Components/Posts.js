@@ -9,6 +9,7 @@ import '../Styles/Post.css';
 
 class Posts extends Component { 
   render() {
+    console.log(this.props);
     const {Posts} = this.props;
     const showPosts=()=>{
         return Posts.map(post=>{
@@ -37,10 +38,14 @@ class Posts extends Component {
       <React.Fragment>
         {Object.keys(this.props.Posts).length>0?<React.Fragment>
             <Helmet>
+              <title>
+                Mern App By mohitnegi724 | mohitnegi.me
+              </title>
               <meta charSet="utf-8"/>
-                <title>
-                    MERN Project | mohitnegi.me
-                </title>
+              <meta property="og:title" content="MERN Project | mohitnegi.me"/>
+              <meta property="og:description" content="Project Made with React, Node, Expressjs And Mongodb"/>
+              <meta property="og:image" content="https://res.cloudinary.com/mohitnegi724/image/upload/v1564223192/React%20Project/Mern-app_hrz90x.jpg"/>
+              <meta property="og:url" content={document.documentURI}/>
           </Helmet>
         </React.Fragment>:<PostsPlaceholder/>}
         {showPosts()}

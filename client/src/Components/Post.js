@@ -40,9 +40,14 @@ class Post extends Component {
         return(
           <div>
             <Helmet>
-                  <meta charSet="utf-8" />
-                  <title>{this.props.Post.title}</title>
+              <title>{this.props.Post.title}</title>
+              <meta charSet="utf-8"/>
+              <meta property="og:title" content={this.props.Post.title}/>
+              <meta property="og:description" content={this.props.Post.articleBody}/>
+              <meta property="og:image" content={this.props.Post.image}/>
+              <meta property="og:url" content={document.documentURI}/>
             </Helmet>
+
             <button className="backButton" onClick={()=>goBack()}>
                   Go Back
             </button>
