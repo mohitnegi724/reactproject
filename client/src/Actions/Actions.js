@@ -16,7 +16,7 @@ export const fetchPostsFromServer=()=>dispatch=>{
 };
 
 export const fetchPostFromServer=id=>dispatch=>{
-    const postId = axios.get("/article/"+id)
+    const postId = axios.get("/articles/"+id);
     postId.then(db =>{
         dispatch({type: FETCH_POST,Post: db.data, status:db.status,actionMessage:"Fetching Post"})
     })
@@ -48,7 +48,7 @@ export const unmountPost=()=>dispatch=>{
 
 
 export const UpdatePost=id=>dispatch=>{
-    axios.get("/article/"+id)
+    axios.get("/articles/"+id)
     .then(post=>{
         dispatch({
             type:POST_UPDATE,

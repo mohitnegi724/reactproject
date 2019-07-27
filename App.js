@@ -22,7 +22,7 @@ app.get('/articles',(req, res)=>{
     posts.find({}).sort({"publishDate":-1}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
 });
 
-app.get('/article/:alias',(req, res) => {
+app.get('/articles/:alias',(req, res) => {
     posts.findOne({alias:req.params.alias}, (err, post)=>{
         if(!post){
             res.status(404).send("err in Fetching Article")
