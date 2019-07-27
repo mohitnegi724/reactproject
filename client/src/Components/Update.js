@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import {Helmet} from 'react-helmet';
 import {UpdatePost, unmountPost} from '../Actions/Actions';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import '../Styles/AddPlace.css';
 
 class Update extends Component {
   state={
     updateThisPost:{}
-  }
+  };
   render() {
     const {Post} = this.props;
     const {alias,title,articleBody, image, imgPictureCredit, source} = this.state.updateThisPost;
@@ -17,8 +18,8 @@ class Update extends Component {
         updateThisPost:{
           [e.target.name]:e.target.value
         }
-      })
-    }
+      });
+    };
 
 
     return (
@@ -72,6 +73,11 @@ class Update extends Component {
             
             <button type="submit" value="Submit" className="submitPlace">Update Place</button>
           </form>
+          <Link to="/">
+            <button type="button" value="cancel" className="cancelAdd">
+                Cancel
+            </button>
+          </Link>
             </div>
             </div>:
             <div>

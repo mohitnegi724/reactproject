@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Helmet} from 'react-helmet';
+import {Link} from 'react-router-dom';
 import '../Styles/AddPlace.css';
 
 class AddPlace extends Component {
@@ -22,6 +23,11 @@ class AddPlace extends Component {
             <br/>
             <button type="submit" value="Submit" className="submitPlace">Add Place</button>
           </form>
+          <Link to="/">
+            <button type="button" value="cancel" className="cancelAdd">
+                Cancel
+            </button>
+          </Link>
         </div>
       </div>
     )
