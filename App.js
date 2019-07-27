@@ -39,13 +39,14 @@ app.post('/create',async (req, res)=>{
     const articleAlias = alias();
     const NewPost={
         title:req.body.title,
+        alias: articleAlias,
         articleBody:req.body.articleBody,
-        contactNumber:req.body.contact,
-        publishDate:Date.now(),
+        publishDate: Date.now(),
         source:req.body.source,
+        sourceLink: req.body.sourceLink,
         image: req.body.image,
-        imgPictureCredit: req.body.credit,
-        alias:articleAlias
+        imgPictureCredit: req.body.imgPictureCredit,
+        imgPictureCreditLink: req.body.imgPictureCreditLink,
     };
     if(alias) {
         await posts.findOne({

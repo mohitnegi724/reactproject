@@ -5,6 +5,10 @@ const postSchema = new Schema({
         type: String,
         required:true
     },
+    alias: {
+        type: String,
+        unique: true
+    },
     articleBody: {
         type: String,
         required: true
@@ -14,19 +18,17 @@ const postSchema = new Schema({
         required: true
     },
     source: {
-        type: String,
-        required: true
+        type: String
     },
-    contactNumber:Number,
+    sourceLink: {
+        type: String
+    },
     image:{
         type: String,
         required:true
     },
     imgPictureCredit:String,
-    alias:{
-        type:String,
-        unique:true
-    }
+    imgPictureCreditLink: String
 });
 const postModel = mongoose.model('Articles',postSchema);
 

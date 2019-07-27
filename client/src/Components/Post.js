@@ -16,7 +16,9 @@ class Post extends Component {
       imgPictureCredit,
       publishDate,
       source,
+      sourceLink,
       title,
+      imgPictureCreditLink,
       _id
     } = this.props.Post;
     const Alias = this.props.match.params.id;
@@ -55,11 +57,11 @@ class Post extends Component {
               <h3 className="openedPostTitle">{title}</h3>
               <div className="postImageInfo">
                 <img src={image} alt={title} className="openedPostImage"/>
-                <p>Picture Credits:{imgPictureCredit}</p>
+                <p>Picture Credits: <a href={imgPictureCreditLink}>{imgPictureCredit}</a></p>
               </div>
               <p>Publish Date : {new Date(Number(publishDate)).toLocaleDateString()}</p>
               <p>{articleBody}</p>
-              <strong><p>Source : <a href={source} target="_blank" rel="noopener noreferrer">{source}</a></p></strong>
+              <strong><p>Source : <a href={sourceLink} target="_blank" rel="noopener noreferrer">{source}</a></p></strong>
               <button type = "delete"
               className = "deleteButton"
               onClick = {() =>deleteFunc()}> 
