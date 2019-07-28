@@ -44,10 +44,17 @@ class Post extends Component {
             <Helmet>
               <title>{this.props.Post.title} | mohitnegi.me</title>
               <meta charSet="utf-8"/>
+              <meta property="og:type" content="website"/>
+              <meta property="og:url" content={document.documentURI}/>
               <meta property="og:title" content={this.props.Post.title}/>
               <meta property="og:description" content={this.props.Post.articleBody}/>
               <meta property="og:image" content={this.props.Post.image}/>
-              <meta property="og:url" content={document.documentURI}/>
+                     
+              <meta property="twitter:card" content="summary_large_image"/>
+              <meta property="twitter:url" content={document.documentURI}/>
+              <meta property="twitter:title" content={this.props.Post.title}/>
+              <meta property="twitter:description" content={this.props.Post.articleBody}/>
+              <meta property="twitter:image" content={this.props.Post.image}/>
             </Helmet>
 
             <button className="backButton" onClick={()=>goBack()}>
