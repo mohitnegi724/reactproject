@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Helmet} from 'react-helmet';
 import {Link} from 'react-router-dom';
 import '../Styles/AddPlace.css';
+  
 
-class AddPlace extends Component {
-  render() {
-    return (
+const AddPlace=()=>{
+  return (
       <div id="formBody">
         <Helmet>
             <meta char="utf-8"/>
@@ -17,7 +17,7 @@ class AddPlace extends Component {
           <form method="post" action="/create">
             <label>Title</label>
             <input type="text" name="title" placeholder="Place Name" required/>
-            <br/>
+            <br/>                                     
             <label>Article Body</label>
             <textarea className="textArea"type="text" name="articleBody" placeholder="Place Description" required/>
             <br/>
@@ -45,7 +45,7 @@ class AddPlace extends Component {
         </div>
       </div>
     )
-  }
 }
+
 
 export default AddPlace;

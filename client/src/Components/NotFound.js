@@ -2,7 +2,7 @@ import React from 'react';
 import '../Styles/NotFound.css';
 import {Link} from 'react-router-dom';
 
-export default function NotFound() {
+const NotFound=()=>{
     return (
         <div className="notFound">
             <div className="innerText">
@@ -14,3 +14,5 @@ export default function NotFound() {
         </div>
     )
 }
+
+export default NotFound;

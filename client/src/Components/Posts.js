@@ -12,6 +12,7 @@ class Posts extends Component {
     console.log(this.props);
     const {Posts} = this.props;
     const showPosts=()=>{
+        localStorage.setItem("Posts",JSON.stringify(Posts));
         return Posts.map(post=>{
             const {_id, alias,title,image, imgPictureCredit,articleBody} = post;
             const readMore=()=>articleBody.slice(0,150);

@@ -42,7 +42,7 @@ class Post extends Component {
         return(
           <div>
             <Helmet>
-              <title>{this.props.Post.title}</title>
+              <title>{this.props.Post.title} | mohitnegi.me</title>
               <meta charSet="utf-8"/>
               <meta property="og:title" content={this.props.Post.title}/>
               <meta property="og:description" content={this.props.Post.articleBody}/>
@@ -57,11 +57,11 @@ class Post extends Component {
               <h3 className="openedPostTitle">{title}</h3>
               <div className="postImageInfo">
                 <img src={image} alt={title} className="openedPostImage"/>
-                <p>Picture Credits: <a href={imgPictureCreditLink} target="_blank" rel="noopener noreferrer">{imgPictureCredit}</a></p>
+                {imgPictureCredit?<p>Picture Credits: <a href={imgPictureCreditLink} target="_blank" rel="noopener noreferrer">{imgPictureCredit}</a></p>:null}
               </div>
               <p>Publish Date : {new Date(Number(publishDate)).toLocaleDateString()}</p>
               <p>{articleBody}</p>
-              <strong><p>Source : <a href={sourceLink} target="_blank" rel="noopener noreferrer">{source}</a></p></strong>
+              <strong>{source?<p>Source : <a href={sourceLink} target="_blank" rel="noopener noreferrer">{source}</a></p>:null}</strong>
               <button type = "delete"
               className = "deleteButton"
               onClick = {() =>deleteFunc()} disabled> 

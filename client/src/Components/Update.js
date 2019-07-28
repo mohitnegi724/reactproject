@@ -32,6 +32,7 @@ class Update extends Component {
               </title>
         </Helmet>
         <div className="Form">
+          
           <form method="post" action={`/update/article/${alias}`}>
             <label>Title</label>
             <input defaultValue={title} onChange={(e)=>dataChangeHandler(e)} type="text" name="title" placeholder="Place Name" required/>
