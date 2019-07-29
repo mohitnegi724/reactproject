@@ -47,6 +47,14 @@
     height: 10rem;
     margin: 20px;
 }
+.placeHolderArticleImage {
+    width: 100%;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    object-fit: cover;
+    height: 100% !important;
+}
 
 @media screen and (max-width: 600px) {
     .placeholderImage{

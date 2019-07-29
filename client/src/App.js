@@ -18,7 +18,7 @@ class App extends Component {
                   <Route exact path="/" component={Posts}/>
                   <Route path="/article/:id" component={Post}/>
                   <Route path="/addplace" component={AddPlace}/>
-                  <Route path="/update/article/:id" component={Update}/>
+                  <Route exact path="/update/article" component={Update}/>
                   <Route path="*" component={Notfound}/>
                 </Switch>
           </div>

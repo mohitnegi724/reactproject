@@ -20,6 +20,9 @@ class Update extends Component {
         }
       });
     };
+    const clearLocalStorage=()=>{
+      localStorage.clear()
+    }
 
 
     return (
@@ -33,7 +36,7 @@ class Update extends Component {
         </Helmet>
         <div className="Form">
           
-          <form method="post" action={`/update/article/${alias}`}>
+          <form method="post" action={`/api/update/article/${alias}`}>
             <label>Title</label>
             <input defaultValue={title} onChange={(e)=>dataChangeHandler(e)} type="text" name="title" placeholder="Place Name" required/>
             <br/>
@@ -55,7 +58,7 @@ class Update extends Component {
             <label>Picture Credits</label>
             <input defaultValue={imgPictureCreditLink} onChange={(e)=>dataChangeHandler(e)} type="text" name="imgPictureCreditLink" placeholder="Picture Credit's Link"/>
             <br/>
-            <button type="submit" value="Submit" className="submitPlace">Update Place</button>
+            <button type="submit" value="Submit" className="submitPlace" onClick={()=>clearLocalStorage()}>Update Place</button>
           </form>
 
 

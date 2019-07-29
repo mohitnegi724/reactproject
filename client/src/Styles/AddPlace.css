@@ -53,8 +53,8 @@ form{
     cursor: pointer;
     outline: none;
     width: 125px;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: #097e00;
     font-family: quicksand;
     height: 40px;
     margin: 10px;

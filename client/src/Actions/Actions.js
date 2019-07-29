@@ -16,6 +16,7 @@ export const fetchPostsFromServer=()=>dispatch=>{
 };
 
 export const fetchPostFromServer=id=>dispatch=>{
+    localStorage.setItem("updateId",id);
     const postId = axios.get("/articles/"+id);
     postId.then(db =>{
         dispatch({type: FETCH_POST,Post: db.data, status:db.status,actionMessage:"Fetching Post"})
@@ -47,12 +48,13 @@ export const unmountPost=()=>dispatch=>{
 };
 
 
-export const UpdatePost=id=>dispatch=>{
+export const UpdatePost=()=>dispatch=>{
+    const id = localStorage.getItem("updateId");
     axios.get("/articles/"+id)
     .then(post=>{
         dispatch({
             type:POST_UPDATE,
-            Post: post.data,
+            Post: post.data, 
             actionMessage:"Article Update"
         });
     })

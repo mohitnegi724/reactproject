@@ -9,17 +9,15 @@ import '../Styles/Post.css';
 
 class Posts extends Component { 
   render() {
-    console.log(this.props);
     const {Posts} = this.props;
-    const showPosts=()=>{
-        localStorage.setItem("Posts",JSON.stringify(Posts));
+    const showAllPosts=()=>{
         return Posts.map(post=>{
             const {_id, alias,title,image, imgPictureCredit,articleBody} = post;
             const readMore=()=>articleBody.slice(0,150);
             return(
                     <div key={_id} className="articleBody">
                         <div className="ImageInfo">
-                            <img src={image} alt={title} className="articleImage"/>
+                            {image?<img src={image} alt={title} className="articleImage"/>:<img src="https://res.cloudinary.com/mohitnegi724/image/upload/v1564388110/React%20Project/loading_yhtnxj.jpg" alt={title} className="articleImage"/>}
                             {imgPictureCredit ?<p className="pictureCredits">{imgPictureCredit}</p> :null}
                         </div>
                         <div className="articleDesc">
@@ -35,21 +33,38 @@ class Posts extends Component {
             )
         });
     };
+    const decideShowPosts=()=>{
+      if(Object.keys(this.props.Posts).length>0){
+        return(
+            <React.Fragment>
+              <Helmet>
+                <title>
+                  Mern App By mohitnegi724 | mohitnegi.me
+                </title>
+                <meta charSet="utf-8"/>
+                <meta property="og:title" content="MERN Project | mohitnegi.me"/>
+                <meta property="og:description" content="Project Made with React, Node, Expressjs And Mongodb"/>
+                <meta property="og:image" content="https://res.cloudinary.com/mohitnegi724/image/upload/v1564223192/React%20Project/Mern-app_hrz90x.jpg"/>
+                <meta property="og:url" content={document.documentURI}/>
+              </Helmet>
+            </React.Fragment>
+        )
+      }else if(Object.keys(this.props.Posts).length<-1){
+        return(
+          <div>
+            <h3>No Posts Available! Create Some Posts</h3>
+          </div>
+        )
+      }else{
+        return (
+          <PostsPlaceholder/>
+        )
+      }
+    }
     return (
       <React.Fragment>
-        {Object.keys(this.props.Posts).length>0?<React.Fragment>
-            <Helmet>
-              <title>
-                Mern App By mohitnegi724 | mohitnegi.me
-              </title>
-              <meta charSet="utf-8"/>
-              <meta property="og:title" content="MERN Project | mohitnegi.me"/>
-              <meta property="og:description" content="Project Made with React, Node, Expressjs And Mongodb"/>
-              <meta property="og:image" content="https://res.cloudinary.com/mohitnegi724/image/upload/v1564223192/React%20Project/Mern-app_hrz90x.jpg"/>
-              <meta property="og:url" content={document.documentURI}/>
-          </Helmet>
-        </React.Fragment>:<PostsPlaceholder/>}
-        {showPosts()}
+        {decideShowPosts()}
+        {showAllPosts()}
       </React.Fragment>
     )
   }

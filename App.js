@@ -72,7 +72,7 @@ app.post('/create',async (req, res)=>{
     });
 });
 
-app.post("/update/article/:alias", (req, res)=>{
+app.post("/api/update/article/:alias", (req, res)=>{
     const {alias} = req.params;
     posts.findOneAndUpdate({alias}, req.body).then(()=>{
         posts.findOne({alias}).then(()=>res.redirect('/'))

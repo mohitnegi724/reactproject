@@ -8,7 +8,6 @@ import '../Styles/Post.css';
 
 class Post extends Component {
  render() {
-   console.log("Checking React ",this.props);
     const {deleteIndividualPost,updateFunc} = this.props;
     const {
       articleBody,
@@ -30,7 +29,7 @@ class Post extends Component {
     
     const updateFunction=()=>{
       updateFunc(Alias);
-      this.props.history.push("/update/article/" + Alias);
+      this.props.history.push("/update/article");
     };
 
     const goBack=()=>{
