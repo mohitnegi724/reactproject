@@ -25,15 +25,15 @@ passport.use(new GoogleStrategy({
         name:profile.displayName,
         googleId:profile.id,
         publishDate:new Date()
-    }).save()
-}))
+    }).save();
+}));
 
 app.get("/login",passport.authenticate("google",{
     scope:['profile']
-}))
+}));
 app.get("/auth/google/redirect",passport.authenticate("google"),(req, res)=>{
-    res.send("You Have Reached URI")
-})
+    res.send("You Have Reached URI");
+});
 
 
 
