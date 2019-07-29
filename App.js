@@ -2,14 +2,40 @@ var express = require("express");
 var app = express();
 var Keys = require('./keys/mongodb');
 var posts = require("./models/post.model.js");
+var Users = require("./models/user.model.js");
 var mongoose = require('mongoose');
 var cors = require("cors");
 const shortid = require("shortid");
 const path = require('path');
 var bodyParser = require('body-parser');
+const passport = require("passport");
+const GoogleStrategy  = require("passport-google-oauth").OAuth2Strategy;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+//Google Authentication
+passport.use(new GoogleStrategy({
+    clientID: Keys.Google.clientID,
+    clientSecret: Keys.Google.clientSecret,
+    callbackURL: "http://localhost:5000/auth/google/redirect"
+}, (accessToke, refreshToken, profile, done)=>{
+    console.log(profile);
+    new Users({
+        name:profile.displayName,
+        googleId:profile.id,
+        publishDate:new Date()
+    }).save()
+}))
+
+app.get("/login",passport.authenticate("google",{
+    scope:['profile']
+}))
+app.get("/auth/google/redirect",passport.authenticate("google"),(req, res)=>{
+    res.send("You Have Reached URI")
+})
+
+
 
 // Step 01
 const PORT = process.env.PORT || 5000;
@@ -18,6 +44,13 @@ const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGODB_URI || Keys.mongoURI, {
     useNewUrlParser: true
 },() => console.log("Database Connected"));
+
+
+app.get("/login/google", (req, res)=>{
+
+})
+
+
 
 app.get('/articles',(req, res)=>{
     posts.find({}).sort({"publishDate":-1}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
