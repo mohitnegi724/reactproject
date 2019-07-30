@@ -8,32 +8,80 @@ var cors = require("cors");
 const shortid = require("shortid");
 const path = require('path');
 var bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
 const passport = require("passport");
-const GoogleStrategy  = require("passport-google-oauth").OAuth2Strategy;
+const GoogleStrategy  = require("passport-google-oauth20").Strategy;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
-//Google Authentication
-passport.use(new GoogleStrategy({
-    clientID: Keys.Google.clientID,
-    clientSecret: Keys.Google.clientSecret,
-    callbackURL: "http://localhost:5000/auth/google/redirect"
-}, (accessToke, refreshToken, profile, done)=>{
-    console.log(profile);
-    new Users({
-        name:profile.displayName,
-        googleId:profile.id,
-        publishDate:new Date()
-    }).save();
-}));
-
-app.get("/login",passport.authenticate("google",{
-    scope:['profile']
-}));
-app.get("/auth/google/redirect",passport.authenticate("google"),(req, res)=>{
-    res.send("You Have Reached URI");
+app.use(
+    cookieSession({
+        maxAge:30*24*60*60*1000,
+        keys:[Keys.cookieKey]
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser((user, done) => {
+    done(null, user.id);
 });
+
+passport.deserializeUser((id, done) => {
+    Users.findById(id)
+        .then(user => {
+            done(null, user);
+        });
+});
+
+
+
+
+
+
+passport.use(new GoogleStrategy({
+    clientID:Keys.Google.clientID,
+    clientSecret:Keys.Google.clientSecret,
+    callbackURL:"/auth/google/callback"
+    }, (accessToken, refreshToken, profile, done) => {
+        Users.findOne({googleId:profile.id}, (err, user)=>{
+            if(!user){
+                new Users({
+                    googleId: profile.id,
+                    name: profile.displayName,
+                    publishDate: new Date()
+                }).save();
+                done(null, user);
+            }
+        });
+    }
+));
+
+app.get("/auth/google",passport.authenticate('google',{
+    scope:["profile", "email"]
+}));
+
+
+app.get("/auth/google/callback",passport.authenticate('google'));
+
+
+
+
+
+app.get("/users",(req, res)=>{
+    Users.find({}).sort({"publishDate":-1}).then(users=>res.send(users)).catch(err=>res.send(err));
+});
+
+
+app.get("/api/currentuser",(req, res)=>{
+    console.log(req);
+    res.send(req.user);
+});
+
+
+
+
+
+
 
 
 
@@ -45,10 +93,6 @@ mongoose.connect(process.env.MONGODB_URI || Keys.mongoURI, {
     useNewUrlParser: true
 },() => console.log("Database Connected"));
 
-
-app.get("/login/google", (req, res)=>{
-
-})
 
 
 
