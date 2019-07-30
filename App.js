@@ -1,47 +1,42 @@
-var express = require("express");
-var app = express();
-var Keys = require('./keys/mongodb');
-var posts = require("./models/post.model.js");
-var Users = require("./models/user.model.js");
-var mongoose = require('mongoose');
-var cors = require("cors");
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const Keys = require('./keys/mongodb');
+const posts = require("./models/post.model.js");
+const Users = require("./models/user.model.js");
+const mongoose = require('mongoose');
 const shortid = require("shortid");
 const path = require('path');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const GoogleStrategy  = require("passport-google-oauth20").Strategy;
 const cookieSession = require('cookie-session');
 const passport = require("passport");
-const GoogleStrategy  = require("passport-google-oauth20").Strategy;
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-app.use(
-    cookieSession({
-        maxAge:30*24*60*60*1000,
+app.use(cookieSession({
+        maxAge:24*60*60*1000,
         keys:[Keys.cookieKey]
-    })
-);
+}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
-
 passport.deserializeUser((id, done) => {
     Users.findById(id)
         .then(user => {
             done(null, user);
         });
 });
-
-
-
-
-
-
 passport.use(new GoogleStrategy({
     clientID:Keys.Google.clientID,
     clientSecret:Keys.Google.clientSecret,
-    callbackURL:"/auth/google/callback"
+    callbackURL:"/login/google/callback"
     }, (accessToken, refreshToken, profile, done) => {
         Users.findOne({googleId:profile.id}, (err, user)=>{
             if(!user){
@@ -49,41 +44,37 @@ passport.use(new GoogleStrategy({
                     googleId: profile.id,
                     name: profile.displayName,
                     publishDate: new Date()
-                }).save();
-                done(null, user);
-            }
+                }).save().then((newUser)=>{
+                    done(null, user);
+                })
+                }else{
+                    done(null, user)
+                }
         });
     }
 ));
 
-app.get("/auth/google",passport.authenticate('google',{
+app.get("/login/google",passport.authenticate('google',{
     scope:["profile", "email"]
 }));
 
 
-app.get("/auth/google/callback",passport.authenticate('google'));
-
-
-
-
-
-app.get("/users",(req, res)=>{
-    Users.find({}).sort({"publishDate":-1}).then(users=>res.send(users)).catch(err=>res.send(err));
+app.get("/login/google/callback",passport.authenticate('google'), (req, res)=>{
+    res.redirect("/user");
 });
 
+app.get("/logout",(req,res)=>{
+    req.logout();
+    res.redirect("/users");
+})
 
-app.get("/api/currentuser",(req, res)=>{
-    console.log(req);
-    res.send(req.user);
-});
-
-
-
-
-
-
-
-
+app.get("/user",(req, res)=>{
+    if(req.user){
+        res.json(req.user);
+    }else{
+        res.send("Please Log In")
+    }
+})
 
 // Step 01
 const PORT = process.env.PORT || 5000;
@@ -93,11 +84,12 @@ mongoose.connect(process.env.MONGODB_URI || Keys.mongoURI, {
     useNewUrlParser: true
 },() => console.log("Database Connected"));
 
-
-
-
 app.get('/articles',(req, res)=>{
     posts.find({}).sort({"publishDate":-1}).then(responses=>res.json(responses)).catch(err=>res.send("err"));
+});
+
+app.get("/users",(req, res)=>{
+    Users.find({}).sort({"publishDate":-1}).then(users=>res.send(users)).catch(err=>res.send(err));
 });
 
 app.get('/articles/:alias',(req, res) => {

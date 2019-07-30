@@ -28,7 +28,8 @@ const postSchema = new Schema({
         required:true
     },
     imgPictureCredit:String,
-    imgPictureCreditLink: String
+    imgPictureCreditLink: String,
+    createdBy:String
 });
 const postModel = mongoose.model('Articles',postSchema);
 

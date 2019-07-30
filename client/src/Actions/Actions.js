@@ -5,7 +5,8 @@ import {
     DELETE_POST,
     POST_UNMOUNT,
     NO_POST_FOUND,
-    POST_UPDATE
+    POST_UPDATE,
+    LOGIN
 } from './Types';
 export const fetchPostsFromServer=()=>dispatch=>{
     axios.get("/articles")
@@ -62,3 +63,17 @@ export const UpdatePost=()=>dispatch=>{
         console.log(err);
     });
 };
+
+export const loggedIn=()=>dispatch=>{
+    axios.get("/login/google")
+    .then(user=>{
+        dispatch({
+            type:LOGIN,
+            user: user, 
+            userLoggedIn:true
+        });
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+}

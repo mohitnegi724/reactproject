@@ -4,13 +4,16 @@ import {
     DELETE_POST,
     POST_UNMOUNT,
     NO_POST_FOUND,
-    POST_UPDATE
+    POST_UPDATE,
+    LOGIN
 } from '../Actions/Types';
 const DEFAULT_STATE={
     Posts: [],
     Post:{},
     postStatus:0,
-    actionMessage:""
+    actionMessage:"",
+    userLoggedIn:false,
+    user:{}
 };
 const rootReducer=(state=DEFAULT_STATE, action)=>{
     switch(action.type){
@@ -49,6 +52,12 @@ const rootReducer=(state=DEFAULT_STATE, action)=>{
                 ...state,
                 Post: action.Post,
                 actionMessage:action.actionMessage
+            };
+        case LOGIN:
+            return{
+                ...state,
+                userLoggedIn: action.userLoggedIn,
+                user:action.user
             }
         default: return state;
     }   

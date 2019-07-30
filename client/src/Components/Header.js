@@ -1,16 +1,31 @@
-import React from 'react';
-import '../App.css';
+import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {loggedIn} from '../Actions/Actions';
+import '../App.css';
 
-const Header=()=>{
-    return (
-        <div>
-            <header>
-            <Link to="/"><h4 className="Logo">Your Guide!</h4></Link>
-            <Link to="/addplace"><button className="addPlaceButton">Add New Place!</button></Link>
-          </header>
-        </div>
-    )
+
+class Header extends Component{
+    render(){
+        const {userLoggedIn,loggedInFunc} = this.props;
+        return (
+            <div>
+                <header>
+                <Link to="/"><h4 className="Logo">Your Guide!</h4></Link>
+                <Link to="/addplace"><button className="addPlaceButton">Add New Place!</button></Link>
+                {userLoggedIn?<Link to="/addplace"><button className="addPlaceButton">Add New Place!</button></Link>:<button className="addPlaceButton" onClick={()=>loggedInFunc()}>Log In</button>}
+              </header>
+            </div>
+        )
+    }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        userLoggedIn: state.userLoggedIn
+    }
+}
+const mapDispatchToProps={
+    loggedInFunc:loggedIn
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
